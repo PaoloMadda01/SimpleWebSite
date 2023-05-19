@@ -1,0 +1,111 @@
+﻿@model IEnumerable<Category>
+@{
+    ViewData["Title"] = "Index";
+}
+
+@*
+<partial name="_Notification" />            <!--richiama _Notification in cui ci sono i tempData-->
+*@
+
+<div class="container p-3">                 <!--Per avere il pulsante di create-->
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Category List</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Category" asp-action="Create" class="btn brn-primary">
+                <i class="bi bi-plus-circle"></i>
+                Create New Category
+            </a>
+        </div>
+    </div>
+    <br />
+
+
+
+    <!--Crea la tabella-->
+    <table class="table table-bordered table-striped" style="width:100%">
+        
+        <!--Colonne-->
+        <thead>
+            <tr>
+                <th>
+                        Category Name                   
+                </th>
+            
+                <th>
+                        Display Order                   
+                </th>
+            
+                <th>
+                        Time
+                </th>
+            
+                <th>
+                        Edit
+                </th>
+            </tr>
+        </thead>
+
+
+        <!--For per scrivere tutti valori delle righe del database-->
+    <tbody>
+        @foreach(var Index in Model)            
+        {
+            <tr>
+
+                <td width="40%">
+                    @Index.Name
+                </td>
+
+
+                <td width="20%">
+                    @Index.DisplayOrder
+                </td>
+
+
+                <td width="20%">
+                    @Index.CreatedDateTime
+                </td>
+
+
+                <td>                                                <!--Per avere il pulsante edit-->
+                    <div class="w-75 btn-group" role="group">
+
+                            
+                                    <!--Genera l'url per aprire l'edit. è un tag helper-->
+                        <a asp-controller="Category"        
+                           asp-action="Edit"
+                           asp-route-id="@Index.id"
+                           class="btn btn-primary">                             <!--Serve per avere il colore del pulsante Blu, comando copiato dal sito bootswatch-->
+                                    <i class="bi bi-pencil-square">  </i>       <!--Copiato da bootstrap per avere il pulsante-->
+                                Edit
+                        </a>
+                    </div>
+                </td>
+
+
+
+                <td>
+                        <!--Per avere il pulsante Delete-->
+                    <div class="w-75 btn-group" role="group">
+                            
+
+                            <!--Genera l'url per aprire il delete. è un tag helper-->
+                            <a asp-controller="Category"
+                           asp-action="Delete"
+                           asp-route-id="@Index.id"
+                           class="btn btn-danger">                 <!--Serve per avere il colore del pulsante Rosso, comando copiato dal sito bootswatch-->
+                                <i class="bi bi-trash"></i>       <!--Copiato da bootstrap per avere il sibolo delete-->
+                                Delete
+                        </a>
+                    </div>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+
+</table>
+</div>
+
